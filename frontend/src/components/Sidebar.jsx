@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Layout, Menu, Typography } from "antd";
 import { RxDashboard } from "react-icons/rx";
 import { MdOutlineAccountBalance } from "react-icons/md";
@@ -20,14 +20,7 @@ const menuItems = [
     children: [
       { key: "statement", label: "Statement" },
       { key: "bill", label: "Bill" },
-      {
-        key: "insights",
-        label: "Insights",
-        children: [
-          { key: "business", label: "Business" },
-          { key: "finance", label: "Finance" },
-        ],
-      },
+      { key: "insights", label: "Insights" },
     ],
   },
   { type: "divider" },
@@ -44,8 +37,12 @@ const menuItems = [
   },
 ];
 
-const Sidebar = () => {
-  const [collapsed, setCollapsed] = useState(false);
+const Sidebar = ({ collapsed, setCollapsed }) => {
+  const [selectedKeys, setSelectedKeys] = React.useState(["dashboard"]);
+
+  const handleMenuClick = (e) => {
+    setSelectedKeys([e.key]);
+  };
 
   return (
     <Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}>
@@ -67,7 +64,8 @@ const Sidebar = () => {
       </div>
       <Menu
         theme="dark"
-        defaultSelectedKeys={["dashboard"]}
+        selectedKeys={selectedKeys}
+        onClick={handleMenuClick}
         mode="inline"
         items={menuItems}
       />
