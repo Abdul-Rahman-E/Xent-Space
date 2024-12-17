@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const menuSlice = createSlice({
   name: "menu",
-  initialState: { selectedKey: "Dashboard" },
+  initialState: { selectedKey: "dashboard" },
   reducers: {
     selectItem: (state, action) => {
       state.selectedKey = action.payload;

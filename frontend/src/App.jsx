@@ -5,6 +5,7 @@ import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import "./App.css";
 import Dashboard from "./pages/Dashboard";
+import Employees from "./pages/Employees";
 
 const { Content, Footer } = Layout;
 
@@ -23,7 +24,8 @@ function App() {
           }}
         >
           <Routes>
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/employees" element={<Employees />} />
           </Routes>
         </Content>
       </Layout>

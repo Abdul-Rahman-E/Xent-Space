@@ -19,7 +19,7 @@ const menuItems = [
     key: "dashboard",
     label: "Dashboard",
     icon: <RxDashboard />,
-    path: "/dashboard",
+    path: "/",
   },
   {
     key: "employee-management",
@@ -27,7 +27,7 @@ const menuItems = [
     icon: <BsPeopleFill />,
     children: [
       { key: "employees", label: "Employees", path: "/employees" },
-      { key: "orders", label: "Operations", path: "/orders" },
+      { key: "salary", label: "Salary", path: "/orders" },
     ],
   },
   {
