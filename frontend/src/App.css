@@ -1,0 +1,67 @@
+.navbar-title {
+  width: 100%;
+  font-size: 2em !important;
+  transition: all 0.3s ease;
+  margin-bottom: 0 !important;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0 !important;
+  padding: 0 20px !important;
+}
+
+.profile-button:focus {
+  outline: none;
+  border: none;
+}
+
+.profile-button {
+  border: none;
+}
+
+.profile-button .ant-avatar {
+  border: none;
+}
+
+@media (min-width: 768px) {
+  .close-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .navbar-title {
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 500px) {
+  .navbar-title {
+    font-size: 1.6em !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .ant-layout-content {
+    transition: margin-left 0.3s ease;
+  }
+
+  .header-mobile {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+  }
+
+  .sider-mobile {
+    position: relative !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .ant-layout-content {
+    margin-left: 0 !important;
+  }
+}

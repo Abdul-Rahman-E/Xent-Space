@@ -1,36 +1,31 @@
-import React, { useState } from "react";
-import { Layout, Menu } from "antd";
+import React from "react";
+import { Layout } from "antd";
+import { Route, Routes } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
+import Navbar from "./components/Navbar";
+import "./App.css";
+import Dashboard from "./pages/Dashboard";
 
-const { Header, Content, Footer } = Layout;
+const { Content, Footer } = Layout;
 
 function App() {
-  const [collapsed, setCollapsed] = useState(false);
-
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
-      <Layout>
-        <Header
+      <Sidebar />
+      <Layout style={{ marginLeft: 0, display: "flex" }}>
+        <Navbar />
+        <Content
           style={{
-            padding: 0,
-            background: "#deecfa",
-            transition: "all 0.3s ease",
             width: "100%",
+            padding: "20px",
+            height: "100%",
+            overflow: "auto",
           }}
-        ></Header>
-        <Content style={{ margin: "16px" }}>
-          <div
-            style={{
-              padding: 24,
-              minHeight: "calc(100vh - 64px - 16px)", // Adjust for Header and Footer
-              background: "#fff",
-            }}
-          >
-            Content goes here
-          </div>
+        >
+          <Routes>
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Routes>
         </Content>
-        <Footer style={{ textAlign: "center" }}>Footer content here</Footer>
       </Layout>
     </Layout>
   );
