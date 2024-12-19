@@ -5,7 +5,8 @@ export const loginAsync = createAsyncThunk(
   "user/login",
   async ({ username, password }, { rejectWithValue }) => {
     const user = usersData.find(
-      (u) => u.username === username && u.password === password
+      (u) =>
+        u.username === username && u.password === password && u.role === "admin"
     );
     if (user) {
       return user;

@@ -27,7 +27,7 @@
 
 .login-layout {
   height: 100vh;
-  background: url("./asset/loginWallapaper.avif") no-repeat center center;
+  background: url("./assets/loginWallapaper.avif") no-repeat center center;
   background-size: cover;
 }
 
@@ -46,7 +46,6 @@
   width: 100%;
   max-width: 400px;
 }
-
 
 @media (min-width: 768px) {
   .close-btn {
