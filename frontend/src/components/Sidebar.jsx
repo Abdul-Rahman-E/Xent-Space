@@ -65,21 +65,16 @@ const Sidebar = () => {
     const currentPath = location.pathname;
     console.log("currentPath: " + currentPath);
 
-    // Find the selected menu item based on the current path
     const selectedMenu = menuItems.find((item) => {
-      // If the item has children, check for any match with the children
       if (item.children) {
-        // Check if the current path starts with any child path
         return item.children.some((child) =>
           currentPath.startsWith(child.path)
         );
       }
 
-      // For top-level items (like Dashboard), match only exact path
       return currentPath === item.path;
     });
 
-    // If a menu is found, select it
     if (selectedMenu) {
       dispatch(selectItem(selectedMenu.key));
     }
