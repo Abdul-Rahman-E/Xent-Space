@@ -1,7 +1,6 @@
 import React from "react";
 import { Layout, Form, Input, Button, Typography, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import Password from "antd/es/input/Password";
 import { useDispatch } from "react-redux";
 import { loginAsync } from "../store/userSlice";
 import { useNavigate } from "react-router-dom";
