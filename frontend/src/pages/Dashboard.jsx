@@ -102,7 +102,7 @@ const Dashboard = () => {
               statistic={{
                 title: "Total Revenue",
                 value: 6019865,
-                suffix: "USD",
+                suffix: "INR",
               }}
             />
             <Divider type={responsive ? "horizontal" : "vertical"} />

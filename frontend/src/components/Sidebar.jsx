@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Layout, Menu, Typography, Button } from "antd";
 import { RxDashboard } from "react-icons/rx";
-import { MdOutlineAccountBalance } from "react-icons/md";
+
 import { IoBarChartSharp } from "react-icons/io5";
 import { BsPeopleFill } from "react-icons/bs";
 import { AiTwotoneAppstore } from "react-icons/ai";
@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectItem } from "../store/menuSlice";
 import { toggleCollapsed } from "../store/sidebarSlice";
 import { CloseOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const { Sider } = Layout;
 const { Title } = Typography;
@@ -24,15 +24,17 @@ const menuItems = [
   {
     key: "employee-management",
     label: "Employee Management",
+    path: "/employee-management",
     icon: <BsPeopleFill />,
     children: [
+      { key: "onboarding", label: "Onboarding", path: "/onboarding" },
       { key: "employees", label: "Employees", path: "/employees" },
-      { key: "salary", label: "Salary", path: "/orders" },
     ],
   },
   {
     key: "tools",
     label: "Tools",
+    path: "/tools",
     icon: <AiTwotoneAppstore />,
     children: [
       { key: "calendar", label: "Calendar", path: "/calendar" },
@@ -42,6 +44,7 @@ const menuItems = [
   {
     key: "charts",
     label: "Charts",
+    path: "/charts",
     icon: <IoBarChartSharp />,
     children: [
       { key: "line", label: "Line", path: "/charts/line" },
@@ -52,10 +55,35 @@ const menuItems = [
 ];
 
 const Sidebar = () => {
-  const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const collapsed = useSelector((state) => state.sidebar.collapsed);
   const selectedKey = useSelector((state) => state.menu.selectedKey);
+
+  useEffect(() => {
+    const currentPath = location.pathname;
+    console.log("currentPath: " + currentPath);
+
+    // Find the selected menu item based on the current path
+    const selectedMenu = menuItems.find((item) => {
+      // If the item has children, check for any match with the children
+      if (item.children) {
+        // Check if the current path starts with any child path
+        return item.children.some((child) =>
+          currentPath.startsWith(child.path)
+        );
+      }
+
+      // For top-level items (like Dashboard), match only exact path
+      return currentPath === item.path;
+    });
+
+    // If a menu is found, select it
+    if (selectedMenu) {
+      dispatch(selectItem(selectedMenu.key));
+    }
+  }, [location.pathname, dispatch]);
 
   const handleMenuClick = (e) => {
     const clickedItem = menuItems.find((item) => item.key === e.key);
@@ -67,16 +95,12 @@ const Sidebar = () => {
     dispatch(selectItem(e.key));
   };
 
-  const handleCollapse = () => {
-    dispatch(toggleCollapsed());
-  };
-
   return (
     <Sider
       className="xent-space sider-mobile"
       collapsible
       collapsed={collapsed}
-      onCollapse={handleCollapse}
+      onCollapse={() => dispatch(toggleCollapsed())}
       collapsedWidth="0"
       trigger={null}
       breakpoint="md"
@@ -118,7 +142,7 @@ const Sidebar = () => {
             icon={
               <CloseOutlined style={{ color: "white", fontSize: "18px" }} />
             }
-            onClick={handleCollapse}
+            onClick={() => dispatch(toggleCollapsed())}
             style={{
               background: "transparent",
               border: "none",
